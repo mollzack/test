@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="test">	
+
+	<insert id="add">
+	  insert into join
+	   values(#{id}, #{pass}, #{pass2}, #{name}, #{phone}, #{gender},
+	         sysdate )
+	</insert>
+	
+	<select id="login" parameterType="hdto" resultType="String">
+	select id from join where id=#{id} and pass=#{pass}
+	</select>
+	
+	<select id="idcheck" resultType="int" parameterType="String">
+	select count(*) from join where id=#{id} 
+	</select>
+	
+	<select id="detail" parameterType="String" resultType="hdto">
+	select * from join where id=#{id} 
+	</select>
+	
+	<update id="edit" parameterType="hdto" >
+	update join set pass=#{pass}, pass2=#{pass2}, name=#{name}, phone=#{phone}
+		where id=#{id}
+	</update>
+	
+	<select id="list" resultType="hdto">
+	select * from join
+	</select>
+	
+	<delete id="delete" parameterType="String">
+	delete from join where id = #{id}
+	</delete>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="image">	
+
+<insert id="add">
+	insert into image 
+	 values(inum_seq.nextval, #{id}, #{title},
+	          #{content}, sysdate, 0, #{img_file_name}, #{img_file_name2}, #{img_file_name3}, #{img_file_name4} )
+</insert>
+
+<select id="selectAll" parameterType="idto" resultType="idto">
+  		select * from ( 
+  			select rownum rn, i.* from
+  			( select * from image where ${skey} like '%' || #{sval} || '%' order by inum desc ) i 
+  		) where rn between #{start} and #{end} 
+  	 </select>
+	
+	<select id="countAll" resultType="int">
+		select count(*) from image
+	</select>
+	
+	<select id="countAll1" parameterType="bdto" resultType="int">
+		select count(*) from image where ${skey} like '%' || #{sval} || '%' 
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="idto">
+		select * from image where inum = #{data}
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		delete from image where inum = #{data}
+	</delete>
+</mapper>
+
+
+ 
+
+
+
+
